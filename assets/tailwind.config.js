@@ -11,7 +11,25 @@ module.exports = {
     extend: {
       colors: {
         brand: "#090",
+        cyber: {
+          black: "#050505",
+          dark: "#0a0a0a",
+          gray: "#1a1a1a",
+          light: "#e0e0e0",
+          primary: "#00ff9f", // Green
+          secondary: "#00b8ff", // Blue
+          accent: "#d600ff", // Pink
+          warning: "#ffbd00", // Yellow
+        }
       },
+      boxShadow: {
+        'neon-green': '0 0 5px #00ff9f, 0 0 20px #00ff9f',
+        'neon-blue': '0 0 5px #00b8ff, 0 0 20px #00b8ff',
+        'neon-pink': '0 0 5px #d600ff, 0 0 20px #d600ff',
+      },
+      fontFamily: {
+        mono: ['"Courier New"', 'Courier', 'monospace'], // Enforce a retro terminal feel
+      }
     },
   },
   darkMode: "class",

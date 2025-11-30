@@ -4,3 +4,157 @@
 
 /* This file is for your main application CSS */
 @import "highlight.css";
+@import "crt_display.css";
+
+@layer utilities {
+  .text-shadow-neon {
+    text-shadow: 0 0 5px #00ff9f, 0 0 10px #00ff9f, 0 0 20px #00ff9f;
+  }
+  .text-shadow-neon-blue {
+    text-shadow: 0 0 5px #00b8ff, 0 0 10px #00b8ff, 0 0 20px #00b8ff;
+  }
+  
+  /* Data Flow Animation Utilities */
+  .animate-data-flow {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      transparent 40%, 
+      #00ff9f 50%, 
+      transparent 60%, 
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: data-flow 2s linear infinite;
+  }
+
+  .animate-data-flow-reverse {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      transparent 40%, 
+      #00ff9f 50%, 
+      transparent 60%, 
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: data-flow-reverse 2s linear infinite;
+  }
+}
+
+@keyframes data-flow {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes data-flow-reverse {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #00b8ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim-1 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 #d600ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim-2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(30px, 9999px, 10px, 0); }
+  20% { clip: rect(70px, 9999px, 90px, 0); }
+  40% { clip: rect(50px, 9999px, 20px, 0); }
+  60% { clip: rect(20px, 9999px, 80px, 0); }
+  80% { clip: rect(90px, 9999px, 10px, 0); }
+  100% { clip: rect(60px, 9999px, 40px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(15px, 9999px, 80px, 0); }
+  20% { clip: rect(85px, 9999px, 10px, 0); }
+  40% { clip: rect(45px, 9999px, 60px, 0); }
+  60% { clip: rect(10px, 9999px, 30px, 0); }
+  80% { clip: rect(75px, 9999px, 95px, 0); }
+  100% { clip: rect(35px, 9999px, 55px, 0); }
+}
+
+/* Scanlines */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 100% 4px;
+  animation: scanlines 1s steps(60) infinite; 
+}
+
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+/* CRT Flicker */
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 255, 159, 0.02);
+  z-index: 49;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  20% { opacity: 0.99; }
+  25% { opacity: 0.95; }
+  30% { opacity: 0.9; }
+  35% { opacity: 0.96; }
+  40% { opacity: 0.98; }
+  45% { opacity: 0.95; }
+  50% { opacity: 0.99; }
+  55% { opacity: 0.93; }
+  60% { opacity: 0.9; }
+  65% { opacity: 0.96; }
+  70% { opacity: 1; }
+  75% { opacity: 0.97; }
+  80% { opacity: 0.95; }
+  85% { opacity: 0.92; }
+  90% { opacity: 0.98; }
+  95% { opacity: 0.99; }
+  100% { opacity: 0.95; }
+}
