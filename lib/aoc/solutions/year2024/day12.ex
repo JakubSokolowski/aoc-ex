@@ -17,8 +17,6 @@ defmodule Aoc.Solutions.Year2024.Day12 do
 
   alias Aoc.Solutions.Grid
 
-  @tags tags
-
   @impl true
   def silver(input) do
     grid = Grid.parse(input)

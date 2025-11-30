@@ -25,8 +25,6 @@ defmodule Aoc.Solutions.Year2024.Day17 do
 
   alias Aoc.Solutions.Parser
 
-  @tags tags
-
   @impl true
   def silver(input) do
     {{a, b, c}, program} = parse_program(input)

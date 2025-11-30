@@ -24,8 +24,6 @@ defmodule Aoc.Solutions.Year2024.Day16 do
 
   alias Aoc.Solutions.Grid
 
-  @tags tags
-
   @dirs [{0, 1}, {1, 0}, {0, -1}, {-1, 0}]
 
   @impl true
