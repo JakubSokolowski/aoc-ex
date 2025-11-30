@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Grid do
+  @moduledoc false
   defstruct [
     :values,
     :width,
@@ -16,12 +17,12 @@ defmodule Aoc.Solutions.Grid do
     {-1, 1}
   ]
 
-  def dirs() do
+  def dirs do
     @directions
   end
 
   def init_empty(width, height) do
-    new(["."] |> List.duplicate(width * height), width, height)
+    ["."] |> List.duplicate(width * height) |> new(width, height)
   end
 
   def new(values, width, height) do
@@ -39,7 +40,8 @@ defmodule Aoc.Solutions.Grid do
     mid_x = div(grid.width, 2)
     mid_y = div(grid.height, 2)
 
-    all_coords(grid)
+    grid
+    |> all_coords()
     |> Enum.count(fn {x, y} ->
       case quadrant do
         1 -> x < mid_x and y < mid_y
@@ -65,7 +67,8 @@ defmodule Aoc.Solutions.Grid do
   end
 
   def neighbours(grid, {x, y}) do
-    Enum.map(@directions, fn {dx, dy} -> {x + dx, y + dy} end)
+    @directions
+    |> Enum.map(fn {dx, dy} -> {x + dx, y + dy} end)
     |> Enum.filter(fn {x, y} -> in_bounds?(grid, {x, y}) end)
   end
 
@@ -92,9 +95,7 @@ defmodule Aoc.Solutions.Grid do
     width = length(hd(rows))
     height = length(rows)
 
-    flat =
-      rows
-      |> List.flatten()
+    flat = List.flatten(rows)
 
     new(flat, width, height)
   end
@@ -111,8 +112,7 @@ defmodule Aoc.Solutions.Grid do
     grid.values
     |> :array.to_list()
     |> Enum.chunk_every(grid.width, grid.width, :discard)
-    |> Enum.map(&Enum.join(&1, ""))
-    |> Enum.join("\n")
+    |> Enum.map_join("\n", &Enum.join(&1, ""))
   end
 
   def get_line(grid, {x, y}, {dx, dy}, len) do
@@ -121,9 +121,7 @@ defmodule Aoc.Solutions.Grid do
       |> Enum.map(fn i -> {x + i * dx, y + i * dy} end)
       |> Enum.filter(fn {x, y} -> in_bounds?(grid, {x, y}) end)
 
-    {coords,
-     coords
-     |> Enum.map(fn {x, y} -> element_at(grid, x, y) end)}
+    {coords, Enum.map(coords, fn {x, y} -> element_at(grid, x, y) end)}
   end
 
   def in_bounds?(grid, {x, y}) do
@@ -139,7 +137,7 @@ defmodule Aoc.Solutions.Grid do
 
   def set_point(grid, {x, y}, value) do
     new_values = :array.set(y * grid.width + x, value, grid.values)
-    %__MODULE__{grid | values: new_values}
+    %{grid | values: new_values}
   end
 
   def swap_points(grid, {x1, y1}, {x2, y2}) do
@@ -154,8 +152,8 @@ defmodule Aoc.Solutions.Grid do
   def find_all(grid) do
     indices = :array.sparse_to_orddict(grid.values)
 
-    indices
-    |> Enum.group_by(
+    Enum.group_by(
+      indices,
       fn {_idx, value} -> value end,
       fn {idx, _value} ->
         y = div(idx, grid.width)
@@ -183,14 +181,13 @@ defmodule Aoc.Solutions.Grid do
     |> Enum.map(fn {row, y} ->
       row
       |> Enum.with_index()
-      |> Enum.map(fn {char, x} ->
+      |> Enum.map_join("", fn {char, x} ->
         if Enum.member?(coords, {x, y}) do
           char
         else
           "."
         end
       end)
-      |> Enum.join("")
     end)
     |> Enum.each(&IO.puts/1)
   end

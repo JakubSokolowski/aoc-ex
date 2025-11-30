@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2024.Day16Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2024.Day16
 
   @day 16
@@ -30,7 +31,7 @@ defmodule Aoc.Solutions.Year2024.Day16Test do
 
       cost = silver(input)
 
-      assert cost == 11048
+      assert cost == 11_048
     end
 
     @tag timeout: :infinity
@@ -39,7 +40,7 @@ defmodule Aoc.Solutions.Year2024.Day16Test do
 
       result = silver(input)
 
-      assert result == 83444
+      assert result == 83_444
     end
   end
 

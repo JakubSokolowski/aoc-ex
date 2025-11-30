@@ -1,14 +1,16 @@
-defmodule Aoc.Solutions.Year2024.Day13 do
-  @tags [:math, :linear_algebra, :no_broot]
+tags = [:math, :linear_algebra, :no_broot]
 
+defmodule Aoc.Solutions.Year2024.Day13 do
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   For both parts, solve the system of linear equations, If it has an integer
   solution, return it, otherwis 0
   """
 
   @behaviour Aoc.Solution
+
+  @tags tags
 
   @impl true
   def silver(input) do
@@ -40,7 +42,8 @@ defmodule Aoc.Solutions.Year2024.Day13 do
   end
 
   def all_nums(input) do
-    Regex.scan(~r/-?\d*\.?\d+/, input)
+    ~r/-?\d*\.?\d+/
+    |> Regex.scan(input)
     |> List.flatten()
     |> Enum.map(&String.to_integer/1)
   end

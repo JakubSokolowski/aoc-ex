@@ -1,5 +1,7 @@
 defmodule Aoc.Solutions.Year2024.Day08 do
+  @moduledoc false
   @behaviour Aoc.Solution
+
   alias Aoc.Solutions.Grid
 
   @impl true
@@ -10,7 +12,7 @@ defmodule Aoc.Solutions.Year2024.Day08 do
 
   defp solve(input, antinode_fn) do
     grid = Grid.parse(input)
-    values = grid |> Grid.find_all() |> Map.drop(["."])
+    values = grid |> Grid.find_all() |> Map.delete(".")
 
     values
     |> Enum.flat_map(fn {antenna, _} -> get_antinodes(values, antenna, grid, antinode_fn) end)
@@ -47,7 +49,8 @@ defmodule Aoc.Solutions.Year2024.Day08 do
   end
 
   defp generate_points(grid, start, {dx, dy}) do
-    Stream.iterate(start, fn {x, y} -> {x + dx, y + dy} end)
+    start
+    |> Stream.iterate(fn {x, y} -> {x + dx, y + dy} end)
     |> Stream.take_while(&Grid.in_bounds?(grid, &1))
     |> Enum.to_list()
   end

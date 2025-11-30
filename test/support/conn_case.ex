@@ -19,15 +19,15 @@ defmodule AocWeb.ConnCase do
 
   using do
     quote do
+      use AocWeb, :verified_routes
+
+      import AocWeb.ConnCase
+      import Phoenix.ConnTest
+      import Plug.Conn
       # The default endpoint for testing
       @endpoint AocWeb.Endpoint
 
-      use AocWeb, :verified_routes
-
       # Import conveniences for testing with connections
-      import Plug.Conn
-      import Phoenix.ConnTest
-      import AocWeb.ConnCase
     end
   end
 

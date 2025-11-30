@@ -9,7 +9,7 @@ defmodule AocWeb.PageController do
     render(conn, :home, layout: false, solutions: solutions)
   end
 
-  defp list_solutions() do
+  defp list_solutions do
     :code.all_available()
     |> Enum.map(fn {module, _filename, _loaded} -> List.to_string(module) end)
     |> Enum.filter(&solution_module?/1)
@@ -26,7 +26,7 @@ defmodule AocWeb.PageController do
     |> Enum.map(&parse_module_name/1)
     |> Enum.group_by(fn {year, _day} -> year end)
     |> Enum.map(fn {year, days} ->
-      %{year: year, days: Enum.map(days, fn {_year, day} -> day end) |> Enum.sort()}
+      %{year: year, days: days |> Enum.map(fn {_year, day} -> day end) |> Enum.sort()}
     end)
     |> Enum.sort_by(& &1.year, :desc)
   end

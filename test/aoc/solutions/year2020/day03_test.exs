@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2020.Day03Test do
   use ExUnit.Case
+
   alias Aoc.Solutions.Year2020.Day03
 
   @input """

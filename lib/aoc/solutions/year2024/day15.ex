@@ -1,11 +1,8 @@
+tags = [:grid, :broot, :sokoban]
+
 defmodule Aoc.Solutions.Year2024.Day15 do
-  @tags [:grid, :broot, :sokoban]
-
-  @behaviour Aoc.Solution
-  alias Aoc.Solutions.Grid
-
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   Erik...Part 1 pretty ok, just move boxes around, wasted a lot of time with
   calcualting the sum by swapping the x/y coords in sum calc.
@@ -15,6 +12,12 @@ defmodule Aoc.Solutions.Year2024.Day15 do
   like a goddang jr
   """
 
+  @behaviour Aoc.Solution
+
+  alias Aoc.Solutions.Grid
+
+  @tags tags
+
   @impl true
   def silver(input), do: solve_puzzle(input, &move_robot/3, "O")
 
@@ -23,7 +26,7 @@ defmodule Aoc.Solutions.Year2024.Day15 do
 
   defp solve_puzzle(input, mover, box_type) do
     [map, moves] = parse(input)
-    robot = Grid.find_coords(map, "@") |> List.first()
+    robot = map |> Grid.find_coords("@") |> List.first()
 
     {final_map, _} = Enum.reduce(moves, {map, robot}, fn move, {m, r} -> mover.(m, r, move) end)
 
@@ -41,7 +44,7 @@ defmodule Aoc.Solutions.Year2024.Day15 do
   defp double(input) do
     input
     |> String.graphemes()
-    |> Enum.map(
+    |> Enum.map_join(
       &case &1 do
         "#" -> "##"
         "O" -> "[]"
@@ -50,7 +53,6 @@ defmodule Aoc.Solutions.Year2024.Day15 do
         c -> c
       end
     )
-    |> Enum.join()
   end
 
   defp next_pos({x, y}, dir) do
@@ -76,13 +78,13 @@ defmodule Aoc.Solutions.Year2024.Day15 do
     boxes = get_boxes_in_line(map, robot, move)
     last_next = next_pos(List.last(boxes), move)
 
-    if Grid.element_at(map, last_next) != "#" do
+    if Grid.element_at(map, last_next) == "#" do
+      {map, robot}
+    else
       map
       |> move_box_chain(boxes, move)
       |> Grid.swap_points(robot, next)
       |> then(&{&1, next})
-    else
-      {map, robot}
     end
   end
 

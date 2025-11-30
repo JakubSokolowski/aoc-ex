@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2020.Day05 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
@@ -7,7 +8,7 @@ defmodule Aoc.Solutions.Year2020.Day05 do
   end
 
   def parse_input(input) do
-    input |> String.split("\n", trim: true)
+    String.split(input, "\n", trim: true)
   end
 
   @impl true
@@ -23,7 +24,7 @@ defmodule Aoc.Solutions.Year2020.Day05 do
   end
 
   def seat_id(pass) do
-    list = pass |> String.to_charlist()
+    list = String.to_charlist(pass)
     row = next_row(list, 0, 0, 128)
     col = next_col(list, 7, 0, 7)
     row * 8 + col

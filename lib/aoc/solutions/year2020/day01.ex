@@ -1,11 +1,10 @@
 defmodule Aoc.Solutions.Year2020.Day01 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
   def silver(input) do
-    numbers =
-      input
-      |> to_nums()
+    numbers = to_nums(input)
 
     case find_pair_sum(numbers, 2020) do
       {a, b} -> "#{a * b}"
@@ -15,9 +14,7 @@ defmodule Aoc.Solutions.Year2020.Day01 do
 
   @impl true
   def gold(input) do
-    nums =
-      input
-      |> to_nums()
+    nums = to_nums(input)
 
     case find_triplet_sum(nums, 2020) do
       {a, b, c} -> "#{a * b * c}"
@@ -26,13 +23,15 @@ defmodule Aoc.Solutions.Year2020.Day01 do
   end
 
   defp to_nums(input) do
-    String.split(input, "\n")
+    input
+    |> String.split("\n")
     |> Enum.reject(&(&1 == ""))
     |> Enum.map(&String.to_integer/1)
   end
 
   defp find_pair_sum(nums, target) do
-    Enum.reduce_while(nums, MapSet.new(), fn num, seen ->
+    nums
+    |> Enum.reduce_while(MapSet.new(), fn num, seen ->
       missing = target - num
 
       if MapSet.member?(seen, missing) do

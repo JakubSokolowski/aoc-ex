@@ -1,4 +1,7 @@
 defmodule AocWeb.SyntaxHighlighter do
+  @moduledoc false
+  alias Makeup.Lexers.ElixirLexer
+
   def higlight(code, language) do
     lexer = get_lexer(language)
 
@@ -7,6 +10,6 @@ defmodule AocWeb.SyntaxHighlighter do
     |> Phoenix.HTML.raw()
   end
 
-  defp get_lexer("elixir"), do: Makeup.Lexers.ElixirLexer
-  defp get_lexer(_), do: Makeup.Lexers.ElixirLexer
+  defp get_lexer("elixir"), do: ElixirLexer
+  defp get_lexer(_), do: ElixirLexer
 end

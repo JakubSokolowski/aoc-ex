@@ -1,6 +1,8 @@
 defmodule Aoc.Solutions.Year2024.Day04Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2024.Day04
+
   alias Aoc.Solutions.Grid
 
   @test_input """

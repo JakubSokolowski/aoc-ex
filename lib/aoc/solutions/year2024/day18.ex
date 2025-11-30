@@ -1,14 +1,17 @@
 defmodule Aoc.Solutions.Year2024.Day18 do
+  @moduledoc false
   @behaviour Aoc.Solution
-  alias Aoc.Solutions.Parser
+
   alias Aoc.Solutions.Grid
+  alias Aoc.Solutions.Parser
+
   @dirs [{0, 1}, {1, 0}, {0, -1}, {-1, 0}]
   # Number of points to check per process
   @chunk_size 100
 
   @impl true
   def silver(input) do
-    coords = parse_coords(input) |> Enum.take(1024)
+    coords = input |> parse_coords() |> Enum.take(1024)
     grid = build_grid(coords, {71, 71})
     start = {0, 0}
     target = {70, 70}
@@ -38,7 +41,8 @@ defmodule Aoc.Solutions.Year2024.Day18 do
       end)
 
     result =
-      Task.yield_many(tasks, :infinity)
+      tasks
+      |> Task.yield_many(:infinity)
       |> Enum.find_value(fn {_task, result} ->
         case result do
           {:ok, {:found, point}} -> point
@@ -77,7 +81,8 @@ defmodule Aoc.Solutions.Year2024.Day18 do
   def build_grid(coords, {width, height}) do
     grid = Grid.init_empty(width, height)
 
-    Enum.reduce(coords, grid, fn point, acc ->
+    coords
+    |> Enum.reduce(grid, fn point, acc ->
       Grid.set_point(acc, point, "#")
     end)
     |> Grid.set_point({0, 0}, "S")

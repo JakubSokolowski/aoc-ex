@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2024.Day05 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
@@ -49,11 +50,10 @@ defmodule Aoc.Solutions.Year2024.Day05 do
   def parse_rules(rules) do
     rules
     |> String.split("\n", trim: true)
-    |> Enum.map(fn line ->
+    |> MapSet.new(fn line ->
       [first, second] = String.split(line, "|")
       {String.to_integer(first), String.to_integer(second)}
     end)
-    |> MapSet.new()
   end
 
   def parse_updates(updates) do

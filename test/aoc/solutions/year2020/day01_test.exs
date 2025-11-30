@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2020.Day01Test do
   use ExUnit.Case
+
   alias Aoc.Solutions.Year2020.Day01
 
   describe "silver/1" do

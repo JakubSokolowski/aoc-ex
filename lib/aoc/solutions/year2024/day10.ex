@@ -1,8 +1,8 @@
-defmodule Aoc.Solutions.Year2024.Day10 do
-  @tags [:grid, :flood_fill, :dfs, :bfs, :broot]
+tags = [:grid, :flood_fill, :dfs, :bfs, :broot]
 
+defmodule Aoc.Solutions.Year2024.Day10 do
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   For silver, flood the paths, for gold, bfs all paths
   """
@@ -10,6 +10,8 @@ defmodule Aoc.Solutions.Year2024.Day10 do
   @behaviour Aoc.Solution
 
   alias Aoc.Solutions.Grid
+
+  @tags tags
 
   @impl true
   def silver(input) do
@@ -34,9 +36,7 @@ defmodule Aoc.Solutions.Year2024.Day10 do
   def trail_head_score(grid, trail_head) do
     flooded = flood_hike(grid, trail_head, MapSet.new())
 
-    flooded
-    |> Enum.filter(fn {x, y} -> grid |> Grid.element_at(x, y) |> String.to_integer() == 9 end)
-    |> Enum.count()
+    Enum.count(flooded, fn {x, y} -> grid |> Grid.element_at(x, y) |> String.to_integer() == 9 end)
   end
 
   def flood_hike(grid, pos, flooded) do
@@ -70,8 +70,7 @@ defmodule Aoc.Solutions.Year2024.Day10 do
   end
 
   def print_paths(grid, all_paths) do
-    all_paths
-    |> Enum.each(fn path ->
+    Enum.each(all_paths, fn path ->
       IO.inspect(path)
       Grid.print_only_coords(grid, path)
       IO.puts("\n")
@@ -82,8 +81,7 @@ defmodule Aoc.Solutions.Year2024.Day10 do
     neighbours = Grid.non_diagonal_neighbours(grid, curr_point)
 
     valid_next_positions =
-      neighbours
-      |> Enum.filter(fn n -> even_slope?(grid, curr_point, n) end)
+      Enum.filter(neighbours, fn n -> even_slope?(grid, curr_point, n) end)
 
     case valid_next_positions do
       [] ->
@@ -93,8 +91,7 @@ defmodule Aoc.Solutions.Year2024.Day10 do
         end
 
       _ ->
-        valid_next_positions
-        |> Enum.reduce(all_paths, fn next_pos, paths_acc ->
+        Enum.reduce(valid_next_positions, all_paths, fn next_pos, paths_acc ->
           {new_x, new_y} = next_pos
           new_curr_path = curr_path ++ [{new_x, new_y}]
           traverse(grid, {new_x, new_y}, new_curr_path, paths_acc)

@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2024.Day15Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2024.Day15
 
   alias Aoc.Solutions.Grid
@@ -69,7 +70,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
 
       result = silver(input)
 
-      assert result == 10092
+      assert result == 10_092
     end
 
     test "should solve silver for real input" do
@@ -94,7 +95,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "^"
 
       {new_map, _} = move_rows(map, robot, move)
@@ -125,7 +126,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "v"
 
       {new_map, _} = move_rows(map, robot, move)
@@ -156,7 +157,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = ">"
 
       {new_map, _} = move_rows(map, robot, move)
@@ -187,7 +188,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "<"
 
       {new_map, _} = move_rows(map, robot, move)
@@ -218,7 +219,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "<"
 
       {new_map, _} = move_rows(map, robot, move)
@@ -249,7 +250,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "<"
 
       {new_map, _new_robot} = move_robot_wide(map, robot, move)
@@ -280,7 +281,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "^"
 
       {new_map, new_robot} = move_robot_wide(map, robot, move)
@@ -312,7 +313,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "^"
 
       {new_map, new_robot} = move_robot_wide(map, robot, move)
@@ -344,7 +345,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "^"
 
       {new_map, _} = move_robot_wide(map, robot, move)
@@ -378,7 +379,7 @@ defmodule Aoc.Solutions.Year2024.Day15Test do
       """
 
       map = Grid.parse(input)
-      robot = Grid.find_coords(map, "@") |> Enum.at(0)
+      robot = map |> Grid.find_coords("@") |> Enum.at(0)
       move = "v"
 
       {new_map, new_robot} = move_robot_wide(map, robot, move)

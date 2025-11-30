@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2024.Day03Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2024.Day03
 
   @year 2024

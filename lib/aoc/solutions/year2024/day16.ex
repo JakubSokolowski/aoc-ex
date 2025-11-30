@@ -1,8 +1,8 @@
-defmodule Aoc.Solutions.Year2024.Day16 do
-  @tags [:grid, :maze, :path_finding, :dijkstra, :prio_queue]
+tags = [:grid, :maze, :path_finding, :dijkstra, :prio_queue]
 
+defmodule Aoc.Solutions.Year2024.Day16 do
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   Silver: Modified Dijkstra's algorithm - track both position and direction, state is:
   - current_pos
@@ -24,13 +24,15 @@ defmodule Aoc.Solutions.Year2024.Day16 do
 
   alias Aoc.Solutions.Grid
 
+  @tags tags
+
   @dirs [{0, 1}, {1, 0}, {0, -1}, {-1, 0}]
 
   @impl true
   def silver(input) do
     map = Grid.parse(input)
-    start = Grid.find_coords(map, "S") |> List.first()
-    target = Grid.find_coords(map, "E") |> List.first()
+    start = map |> Grid.find_coords("S") |> List.first()
+    target = map |> Grid.find_coords("E") |> List.first()
 
     case find_paths(map, start, target) do
       :no_path -> "No path found"
@@ -41,8 +43,8 @@ defmodule Aoc.Solutions.Year2024.Day16 do
   @impl true
   def gold(input) do
     map = Grid.parse(input)
-    start = Grid.find_coords(map, "S") |> List.first()
-    target = Grid.find_coords(map, "E") |> List.first()
+    start = map |> Grid.find_coords("S") |> List.first()
+    target = map |> Grid.find_coords("E") |> List.first()
 
     case find_paths(map, start, target) do
       :no_path -> "No path found"
@@ -56,18 +58,16 @@ defmodule Aoc.Solutions.Year2024.Day16 do
   end
 
   defp search(map, target, q, costs, paths, best, min) when min != :infinity do
-    cond do
-      :gb_sets.is_empty(q) ->
+    if :gb_sets.is_empty(q) do
+      {min, best, MapSet.new(List.flatten(best))}
+    else
+      {{cost, _, _, _}, _} = :gb_sets.take_smallest(q)
+
+      if cost > min do
         {min, best, MapSet.new(List.flatten(best))}
-
-      true ->
-        {{cost, _, _, _}, _} = :gb_sets.take_smallest(q)
-
-        if cost > min do
-          {min, best, MapSet.new(List.flatten(best))}
-        else
-          step(map, target, q, costs, paths, best, min)
-        end
+      else
+        step(map, target, q, costs, paths, best, min)
+      end
     end
   end
 

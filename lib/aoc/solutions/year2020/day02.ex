@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2020.Day02 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
@@ -7,8 +8,7 @@ defmodule Aoc.Solutions.Year2020.Day02 do
     |> String.split("\n", trim: true)
     |> Enum.reject(&(&1 == ""))
     |> Enum.map(&parse/1)
-    |> Enum.filter(&has_proper_count/1)
-    |> Enum.count()
+    |> Enum.count(&has_proper_count/1)
   end
 
   @impl true
@@ -17,8 +17,7 @@ defmodule Aoc.Solutions.Year2020.Day02 do
     |> String.split("\n", trim: true)
     |> Enum.reject(&(&1 == ""))
     |> Enum.map(&parse/1)
-    |> Enum.filter(&has_proper_positons/1)
-    |> Enum.count()
+    |> Enum.count(&has_proper_positons/1)
   end
 
   defp has_proper_count(pass) do

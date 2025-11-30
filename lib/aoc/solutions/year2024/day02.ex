@@ -1,15 +1,18 @@
 defmodule Aoc.Solutions.Year2024.Day02 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
   def silver(input) do
-    to_reports(input)
+    input
+    |> to_reports()
     |> Enum.count(fn r -> valid(r) end)
   end
 
   @impl true
   def gold(input) do
-    to_reports(input)
+    input
+    |> to_reports()
     |> Enum.count(fn r -> valid_dampened(r) end)
   end
 
@@ -30,25 +33,24 @@ defmodule Aoc.Solutions.Year2024.Day02 do
       |> Enum.map(fn [a, b] -> b - a end)
 
     all_increasing =
-      diffs
-      |> Enum.all?(fn x -> x >= 1 end)
+      Enum.all?(diffs, fn x -> x >= 1 end)
 
     all_decreasing =
-      diffs
-      |> Enum.all?(fn x -> x <= 0 end)
+      Enum.all?(diffs, fn x -> x <= 0 end)
 
     all_diffs_in_range =
-      diffs
-      |> Enum.all?(fn x -> abs(x) >= 1 and abs(x) <= 3 end)
+      Enum.all?(diffs, fn x -> abs(x) >= 1 and abs(x) <= 3 end)
 
     (all_decreasing || all_increasing) && all_diffs_in_range
   end
 
   def to_reports(input) do
-    String.split(input, "\n", trim: true)
+    input
+    |> String.split("\n", trim: true)
     |> Enum.reject(&(&1 == ""))
     |> Enum.map(fn x ->
-      String.split(x, " ", trim: true)
+      x
+      |> String.split(" ", trim: true)
       |> Enum.map(&String.to_integer/1)
     end)
     |> Enum.filter(&(&1 != []))

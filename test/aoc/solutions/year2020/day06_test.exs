@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2020.Day06Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2020.Day06
 
   describe "silver/1" do

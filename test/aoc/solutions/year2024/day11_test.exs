@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2024.Day11Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2024.Day11
 
   @day 11
@@ -12,7 +13,7 @@ defmodule Aoc.Solutions.Year2024.Day11Test do
 
       result = silver(input)
 
-      assert result == 55312
+      assert result == 55_312
     end
 
     test "should solve silver for real input" do

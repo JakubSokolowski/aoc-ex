@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2024.Day06 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   alias Aoc.Solutions.Grid
@@ -20,15 +21,14 @@ defmodule Aoc.Solutions.Year2024.Day06 do
     next_pos =
       Grid.add_coords(guard, get_delta(guard_dir))
 
-    case Grid.in_bounds?(grid, next_pos) do
-      false ->
-        path
-
-      true ->
-        case MapSet.member?(obstacles, next_pos) do
-          true -> traverse(grid, guard, turn_right(guard_dir), obstacles, path)
-          false -> traverse(grid, next_pos, guard_dir, obstacles, [next_pos | path])
-        end
+    if Grid.in_bounds?(grid, next_pos) do
+      if MapSet.member?(obstacles, next_pos) do
+        traverse(grid, guard, turn_right(guard_dir), obstacles, path)
+      else
+        traverse(grid, next_pos, guard_dir, obstacles, [next_pos | path])
+      end
+    else
+      path
     end
   end
 
@@ -36,20 +36,16 @@ defmodule Aoc.Solutions.Year2024.Day06 do
     next_pos =
       Grid.add_coords(guard, get_delta(guard_dir))
 
-    case Grid.in_bounds?(grid, next_pos) do
-      false ->
-        path
+    if Grid.in_bounds?(grid, next_pos) do
+      {x, y} = next_pos
 
-      true ->
-        {x, y} = next_pos
-
-        case MapSet.member?(obstacles, next_pos) do
-          true ->
-            traverse_with_dirs(grid, guard, turn_right(guard_dir), obstacles, path)
-
-          false ->
-            traverse_with_dirs(grid, next_pos, guard_dir, obstacles, [{x, y, guard_dir} | path])
-        end
+      if MapSet.member?(obstacles, next_pos) do
+        traverse_with_dirs(grid, guard, turn_right(guard_dir), obstacles, path)
+      else
+        traverse_with_dirs(grid, next_pos, guard_dir, obstacles, [{x, y, guard_dir} | path])
+      end
+    else
+      path
     end
   end
 
@@ -141,15 +137,13 @@ defmodule Aoc.Solutions.Year2024.Day06 do
     new_grid = Grid.set_point(grid, obstacle, "#")
     guard_coords = Grid.find_coords(new_grid, "^")
 
-    case Enum.empty?(guard_coords) do
-      true ->
-        false
-
-      false ->
-        [guard] = guard_coords
-        guard_dir = :up
-        obstacles = new_grid |> Grid.find_coords("#") |> MapSet.new()
-        detect_loop(new_grid, guard, guard_dir, obstacles, MapSet.new())
+    if Enum.empty?(guard_coords) do
+      false
+    else
+      [guard] = guard_coords
+      guard_dir = :up
+      obstacles = new_grid |> Grid.find_coords("#") |> MapSet.new()
+      detect_loop(new_grid, guard, guard_dir, obstacles, MapSet.new())
     end
   end
 

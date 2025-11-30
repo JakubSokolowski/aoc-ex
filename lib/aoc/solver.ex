@@ -1,4 +1,5 @@
 defmodule Aoc.Solver do
+  @moduledoc false
   require Logger
 
   @spec get_problem!(year :: integer, day :: integer) :: map
@@ -46,9 +47,7 @@ defmodule Aoc.Solver do
     Logger.info("Attempting to read module #{module} from #{path}")
     Logger.info("Path contents: #{inspect(File.ls(solutions_path))}")
 
-    Logger.info(
-      "Year path contents: #{inspect(File.ls(Path.join([solutions_path, "year#{year}"])))}"
-    )
+    Logger.info("Year path contents: #{inspect(File.ls(Path.join([solutions_path, "year#{year}"])))}")
 
     case File.read(path) do
       {:ok, source_code} ->
