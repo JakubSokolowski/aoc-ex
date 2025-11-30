@@ -117,20 +117,13 @@ defmodule AocWeb.SolutionLive do
           >
             [Source_Transmission]
           </.link>
-          <.link
-            href={@problem.problem_input_url}
-            target="_blank"
-            class="hover:text-cyber-accent hover:underline decoration-cyber-accent/50 underline-offset-4 transition-colors"
-          >
-            [Download_Data]
-          </.link>
         </div>
       </div>
 
       <div class="relative min-h-screen">
         <!-- Code Viewer (Main Content) -->
         <div class="w-full">
-          <div class="relative border border-cyber-secondary bg-cyber-black/90 shadow-neon-blue rounded-lg overflow-hidden h-full min-h-[80vh] crt-display">
+          <div class="relative border border-cyber-secondary shadow-neon-blue rounded-lg overflow-hidden h-full min-h-[80vh] crt-display">
             <div class="flex items-center justify-between bg-cyber-gray/50 px-4 py-2 border-b border-cyber-secondary/30 relative z-10">
               <div class="flex gap-2">
                 <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
@@ -143,7 +136,7 @@ defmodule AocWeb.SolutionLive do
             </div>
 
             <div class="p-0 overflow-x-auto h-full custom-scrollbar">
-              <pre class="p-6 text-sm font-mono leading-relaxed"><%= @solution_code %></pre>
+              <pre class="highlight p-6 text-sm font-mono leading-relaxed"><%= @solution_code %></pre>
             </div>
             <!-- Decorative corner pieces -->
             <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyber-secondary">
@@ -163,19 +156,19 @@ defmodule AocWeb.SolutionLive do
             </div>
             <!-- Data Conduits -->
             <div class="absolute top-1/2 -translate-y-1/2 w-full flex flex-col gap-2 px-1">
-              <div class="h-[2px] w-full bg-cyber-primary/30 animate-data-flow"></div>
-              <div class="h-[1px] w-full bg-cyber-primary/50"></div>
-              <div class="h-[2px] w-full bg-cyber-primary/30 animate-data-flow-reverse"></div>
+              <div class="h-[2px] w-full bg-cyber-secondary/30 animate-data-flow"></div>
+              <div class="h-[1px] w-full bg-cyber-secondary/50"></div>
+              <div class="h-[2px] w-full bg-cyber-secondary/30 animate-data-flow-reverse"></div>
             </div>
             <!-- Background plate behind wires -->
             <div class="absolute inset-y-2 inset-x-2 bg-cyber-black/80 -z-10"></div>
           </div>
           <!-- Execution Module -->
-          <div class="relative p-3 border border-cyber-primary bg-cyber-black/90 shadow-neon-green rounded-lg overflow-hidden group z-10">
-            <div class="absolute top-0 left-0 px-2 py-1 text-[10px] bg-cyber-primary text-cyber-black font-bold">
+          <div class="relative p-3 border border-cyber-secondary bg-cyber-black/90 shadow-neon-blue rounded-lg overflow-hidden group z-10">
+            <div class="absolute top-0 left-0 px-2 py-1 text-[10px] bg-cyber-secondary text-cyber-black font-bold">
               EXEC_MODULE
             </div>
-            <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-cyber-primary animate-pulse">
+            <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-cyber-secondary animate-pulse">
             </div>
 
             <.form :let={f} for={%{}} as={:solution} phx-submit="solve" class="space-y-6 mt-4">
@@ -213,14 +206,14 @@ defmodule AocWeb.SolutionLive do
 
               <.button
                 type="submit"
-                class="w-full py-3 relative overflow-hidden group bg-cyber-gray border border-cyber-primary text-cyber-primary font-bold tracking-widest hover:bg-cyber-primary hover:text-cyber-black transition-all duration-300 shadow-[0_0_10px_rgba(0,255,159,0.3)] hover:shadow-[0_0_20px_rgba(0,255,159,0.6)]"
+                class="w-full py-3 relative overflow-hidden group bg-cyber-gray border border-cyber-secondary text-cyber-secondary font-bold tracking-widest hover:bg-cyber-secondary hover:text-cyber-black transition-all duration-300 shadow-[0_0_10px_rgba(0,184,255,0.3)] hover:shadow-[0_0_20px_rgba(0,184,255,0.6)]"
                 phx-disable-with="PROCESSING..."
               >
-                <span class="relative z-10">INITIATE</span>
+                <span class="relative z-10">SOLVE</span>
               </.button>
             </.form>
             <!-- Status Display -->
-            <div class="mt-4 pt-4 border-t border-cyber-primary/30">
+            <div class="mt-4 pt-4 border-t border-cyber-secondary/30">
               <%= if @error do %>
                 <div class="p-4 border border-red-500/50 bg-red-900/20 text-red-400 text-sm font-mono animate-pulse">
                   <span class="font-bold">CRITICAL_FAILURE:</span> <%= @error %>
@@ -231,9 +224,9 @@ defmodule AocWeb.SolutionLive do
                 <div class="space-y-2">
                   <div class="flex justify-between text-xs text-cyber-secondary uppercase">
                     <span>Execution_Time</span>
-                    <span class="text-cyber-primary"><%= @solve_time %>ms</span>
+                    <span class="text-cyber-secondary"><%= @solve_time %>ms</span>
                   </div>
-                  <div class="p-4 border border-cyber-primary/50 bg-cyber-primary/10 text-cyber-primary text-lg font-bold break-all shadow-[inset_0_0_20px_rgba(0,255,159,0.1)]">
+                  <div class="p-4 border border-cyber-secondary/50 bg-cyber-secondary/10 text-cyber-secondary text-lg font-bold break-all shadow-[inset_0_0_20px_rgba(0,184,255,0.1)]">
                     > <%= @result %>_
                   </div>
                 </div>
