@@ -71,7 +71,6 @@ defmodule Aoc.Solutions.Year2024.Day10 do
 
   def print_paths(grid, all_paths) do
     Enum.each(all_paths, fn path ->
-      IO.inspect(path)
       Grid.print_only_coords(grid, path)
       IO.puts("\n")
     end)
