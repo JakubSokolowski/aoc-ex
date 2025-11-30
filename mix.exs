@@ -71,6 +71,7 @@ defmodule Aoc.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      start: ["phx.server"],
       setup: ["deps.get", "assets.setup", "assets.build"],
       test: ["test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
