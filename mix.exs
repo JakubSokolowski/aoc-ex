@@ -55,7 +55,8 @@ defmodule Aoc.MixProject do
       {:makeup_elixir, "~> 0.16"},
       {:igniter, "~> 0.4.8"},
       {:tz, "~> 0.28"},
-      {:styler, "~> 1.0", only: [:dev, :test], runtime: false}
+      {:styler, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 

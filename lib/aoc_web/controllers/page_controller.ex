@@ -3,7 +3,6 @@ defmodule AocWeb.PageController do
 
   def home(conn, _params) do
     available = list_solutions()
-    dbg(available)
     solutions = build_solutions_struct(available)
 
     render(conn, :home, layout: false, solutions: solutions)

@@ -14,7 +14,6 @@ defmodule Aoc.Solutions.Year2024.Day01Test do
       3   3"
 
       result = silver(input)
-      IO.inspect(result)
 
       assert result == 11
     end

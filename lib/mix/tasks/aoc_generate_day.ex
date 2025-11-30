@@ -44,8 +44,6 @@ defmodule Mix.Tasks.AocGenerateDay do
 
     input_path = Path.join(["priv", "static", "inputs", to_string(year), "day#{full_day}.txt"])
 
-    dbg({full_day, day_module_name, test_module_name, input_path})
-
     igniter
     |> Igniter.create_new_file(input_path, "input")
     |> Igniter.Project.Module.create_module(

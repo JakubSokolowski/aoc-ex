@@ -136,7 +136,7 @@ defmodule Aoc.Solver do
     module_name = "Elixir.Aoc.Solutions.Year#{year}.Day#{pad_day(day)}"
 
     try do
-      String.to_existing_atom(module_name)
+      _ = String.to_existing_atom(module_name)
       true
     rescue
       ArgumentError -> false
