@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2024.Day07Test do
   use ExUnit.Case
+
   import Aoc.Solutions.Year2024.Day07
 
   @day 07
@@ -40,7 +41,7 @@ defmodule Aoc.Solutions.Year2024.Day07Test do
 
       result = gold(input)
 
-      assert result == 11387
+      assert result == 11_387
     end
 
     @tag timeout: :infinity

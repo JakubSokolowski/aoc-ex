@@ -1,7 +1,8 @@
 defmodule Aoc.Solutions.Year2024.Day04 do
-  alias Elixir.Aoc.Solutions.Grid
-
+  @moduledoc false
   @behaviour Aoc.Solution
+
+  alias Elixir.Aoc.Solutions.Grid
 
   @impl true
   def silver(input) do
@@ -45,18 +46,14 @@ defmodule Aoc.Solutions.Year2024.Day04 do
     ]
 
     mas_lines =
-      a_coords
-      |> Enum.map(fn {x, y} -> find_word_lines(grid, {x, y}, "MAS", directions) end)
+      Enum.map(a_coords, fn {x, y} -> find_word_lines(grid, {x, y}, "MAS", directions) end)
 
-    flat_lines = mas_lines |> List.flatten()
+    flat_lines = List.flatten(mas_lines)
 
     middle_points =
-      flat_lines
-      |> Enum.map(fn line -> Enum.at(line[:coords], 1) end)
+      Enum.map(flat_lines, fn line -> Enum.at(line[:coords], 1) end)
 
-    freqs =
-      middle_points
-      |> Enum.frequencies()
+    freqs = Enum.frequencies(middle_points)
 
     overlapping =
       freqs
@@ -64,8 +61,7 @@ defmodule Aoc.Solutions.Year2024.Day04 do
       |> Enum.map(fn {point, _} -> point end)
 
     x_masses =
-      flat_lines
-      |> Enum.filter(fn line -> Enum.member?(overlapping, Enum.at(line[:coords], 1)) end)
+      Enum.filter(flat_lines, fn line -> Enum.member?(overlapping, Enum.at(line[:coords], 1)) end)
 
     div(Enum.count(x_masses), 2)
   end
@@ -75,7 +71,7 @@ defmodule Aoc.Solutions.Year2024.Day04 do
     coords = Grid.find_coords(grid, first_char)
 
     all_lines =
-      coords |> Enum.map(fn {x, y} -> find_word_lines(grid, {x, y}, word, Grid.dirs()) end)
+      Enum.map(coords, fn {x, y} -> find_word_lines(grid, {x, y}, word, Grid.dirs()) end)
 
     all_lines
     |> Enum.map(fn lines -> Enum.count(lines) end)

@@ -42,12 +42,7 @@ defmodule Aoc.MixProject do
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
-       github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
-       sparse: "optimized",
-       app: false,
-       compile: false,
-       depth: 1},
+       github: "tailwindlabs/heroicons", tag: "v2.1.1", sparse: "optimized", app: false, compile: false, depth: 1},
       {:swoosh, "~> 1.5"},
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 1.0"},
@@ -59,7 +54,8 @@ defmodule Aoc.MixProject do
       {:makeup, "~> 1.0"},
       {:makeup_elixir, "~> 0.16"},
       {:igniter, "~> 0.4.8"},
-      {:tz, "~> 0.28"}
+      {:tz, "~> 0.28"},
+      {:styler, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
   end
 

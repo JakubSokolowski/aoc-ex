@@ -1,5 +1,6 @@
 defmodule Aoc.Solutions.Year2024.Day17Test do
   use ExUnit.Case
+
   import Elixir.Aoc.Solutions.Year2024.Day17
 
   @day 17
@@ -130,12 +131,12 @@ defmodule Aoc.Solutions.Year2024.Day17Test do
     end
 
     test "should set B to 44354 wheb B contains 2024 and C contains 43690" do
-      registers = {0, 2024, 43690}
+      registers = {0, 2024, 43_690}
       program = [4, 0]
 
       result = run_program(registers, program)
 
-      assert result == {{0, 44354, 43690}, 2, []}
+      assert result == {{0, 44_354, 43_690}, 2, []}
     end
 
     test "should output itself" do

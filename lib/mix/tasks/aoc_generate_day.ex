@@ -1,8 +1,6 @@
+example = "mix aoc_generate_day 6 2020"
+
 defmodule Mix.Tasks.AocGenerateDay do
-  use Igniter.Mix.Task
-
-  @example "mix aoc_generate_day 6 2020"
-
   @shortdoc "Generates a template for the AOC day solution"
   @moduledoc """
   #{@shortdoc}
@@ -12,7 +10,7 @@ defmodule Mix.Tasks.AocGenerateDay do
   ## Example
 
   ```bash
-  #{@example}
+  #{example}
   ```
 
   ## Options
@@ -20,6 +18,10 @@ defmodule Mix.Tasks.AocGenerateDay do
   * [day] The day of the month to generate
   * [year] The year to generate, defaults to the current year
   """
+
+  use Igniter.Mix.Task
+
+  @example example
 
   def info(_argv, _composing_task) do
     %Igniter.Mix.Task.Info{

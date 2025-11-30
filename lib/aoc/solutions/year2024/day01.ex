@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2024.Day01 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
@@ -28,7 +29,8 @@ defmodule Aoc.Solutions.Year2024.Day01 do
   end
 
   def to_lists(input) do
-    String.split(input, "\n", trim: true)
+    input
+    |> String.split("\n", trim: true)
     |> Enum.reject(&(&1 == ""))
     |> Enum.map(fn x -> String.split(x, " ", trim: true) end)
     |> Enum.map(&List.to_tuple/1)

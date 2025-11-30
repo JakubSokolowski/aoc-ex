@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2020.Day03 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true

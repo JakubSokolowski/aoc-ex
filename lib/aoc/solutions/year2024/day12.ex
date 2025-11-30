@@ -1,8 +1,8 @@
-defmodule Aoc.Solutions.Year2024.Day12 do
-  @tags [:grid, :flood_fill, :broot]
+tags = [:grid, :flood_fill, :broot]
 
+defmodule Aoc.Solutions.Year2024.Day12 do
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   For silver, find all regions using flood fill, get perimeter by counting
   non-diagonal neighbours that are not in the region.
@@ -16,6 +16,8 @@ defmodule Aoc.Solutions.Year2024.Day12 do
   @behaviour Aoc.Solution
 
   alias Aoc.Solutions.Grid
+
+  @tags tags
 
   @impl true
   def silver(input) do
@@ -140,7 +142,8 @@ defmodule Aoc.Solutions.Year2024.Day12 do
     all_points = Grid.all_coords(grid)
     total_points = length(all_points)
 
-    Enum.reduce(all_points, {[], MapSet.new()}, fn point, {regions, all_visited} = acc ->
+    all_points
+    |> Enum.reduce({[], MapSet.new()}, fn point, {regions, all_visited} = acc ->
       points_remaining = total_points - MapSet.size(all_visited)
 
       cond do
@@ -163,7 +166,7 @@ defmodule Aoc.Solutions.Year2024.Day12 do
     region = MapSet.put(region, pos)
     all_visited = MapSet.put(all_visited, pos)
     {x, y} = pos
-    current_plant = grid |> Grid.element_at(x, y)
+    current_plant = Grid.element_at(grid, x, y)
 
     region_plants =
       grid
@@ -180,7 +183,7 @@ defmodule Aoc.Solutions.Year2024.Day12 do
 
   defp same_plant?(grid, pos, current_plant) do
     {x, y} = pos
-    neighbor_plant = grid |> Grid.element_at(x, y)
+    neighbor_plant = Grid.element_at(grid, x, y)
     neighbor_plant == current_plant
   end
 end

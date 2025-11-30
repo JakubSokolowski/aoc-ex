@@ -1,14 +1,16 @@
-defmodule Aoc.Solutions.Year2024.Day11 do
-  @tags [:memoization]
+tags = [:memoization]
 
+defmodule Aoc.Solutions.Year2024.Day11 do
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   For both parts, do not keep the stones itself in memory, just their counts
 
   """
 
   @behaviour Aoc.Solution
+
+  @tags tags
 
   @impl true
   def silver(input) do
@@ -33,7 +35,7 @@ defmodule Aoc.Solutions.Year2024.Day11 do
   end
 
   def stone_counts(stones) do
-    Enum.reduce(stones, %{}, fn stone, acc -> acc |> Map.update(stone, 1, &(&1 + 1)) end)
+    Enum.reduce(stones, %{}, fn stone, acc -> Map.update(acc, stone, 1, &(&1 + 1)) end)
   end
 
   def count_digits(num) do
@@ -43,7 +45,7 @@ defmodule Aoc.Solutions.Year2024.Day11 do
   def blink(counts) do
     Enum.reduce(counts, %{}, fn {num, count}, acc ->
       cond do
-        count_digits(num) |> rem(2) == 0 ->
+        num |> count_digits() |> rem(2) == 0 ->
           {first, second} = split_num(num)
 
           acc
@@ -51,10 +53,10 @@ defmodule Aoc.Solutions.Year2024.Day11 do
           |> Map.update(second, count, &(&1 + count))
 
         num == 0 ->
-          acc |> Map.update(1, count, &(&1 + count))
+          Map.update(acc, 1, count, &(&1 + count))
 
         true ->
-          acc |> Map.update(num * 2024, count, &(&1 + count))
+          Map.update(acc, num * 2024, count, &(&1 + count))
       end
     end)
   end

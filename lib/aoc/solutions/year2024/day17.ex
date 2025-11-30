@@ -1,8 +1,8 @@
-defmodule Aoc.Solutions.Year2024.Day17 do
-  @tags [:intcode, :cycles, :bitwise]
+tags = [:intcode, :cycles, :bitwise]
 
+defmodule Aoc.Solutions.Year2024.Day17 do
   @moduledoc """
-  Tags #{inspect(@tags)}
+  Tags #{inspect(tags)}
 
   Silver:
   Just impl the ops and run the program
@@ -19,10 +19,13 @@ defmodule Aoc.Solutions.Year2024.Day17 do
   while keeping the precious positions correct
   """
 
+  @behaviour Aoc.Solution
+
   import Bitwise
 
-  @behaviour Aoc.Solution
   alias Aoc.Solutions.Parser
+
+  @tags tags
 
   @impl true
   def silver(input) do
@@ -78,16 +81,16 @@ defmodule Aoc.Solutions.Year2024.Day17 do
     end
   end
 
-  def execute(registers = {a, b, c}, opcode, operand, pointer, output) do
+  def execute({a, b, c} = registers, opcode, operand, pointer, output) do
     next_pointer = pointer + 2
 
     case opcode do
       0 -> {div_a(registers, operand), next_pointer, output}
       1 -> {{a, bxor(b, operand), c}, next_pointer, output}
-      2 -> {{a, combo(registers, operand) |> rem(8), c}, next_pointer, output}
+      2 -> {{a, registers |> combo(operand) |> rem(8), c}, next_pointer, output}
       3 -> if(a == 0, do: {registers, next_pointer, output}, else: {registers, operand, output})
       4 -> {{a, bxor(b, c), c}, next_pointer, output}
-      5 -> {registers, next_pointer, output ++ [combo(registers, operand) |> rem(8)]}
+      5 -> {registers, next_pointer, output ++ [registers |> combo(operand) |> rem(8)]}
       6 -> {{a, div_value(a, operand, registers), c}, next_pointer, output}
       7 -> {{a, b, div_value(a, operand, registers)}, next_pointer, output}
       _ -> registers

@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2020.Day04 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @impl true
@@ -6,8 +7,7 @@ defmodule Aoc.Solutions.Year2020.Day04 do
     input
     |> String.split("\n\n", trim: true)
     |> Enum.map(&parse_passport/1)
-    |> Enum.filter(&has_all_keys/1)
-    |> Enum.count()
+    |> Enum.count(&has_all_keys/1)
   end
 
   @impl true
@@ -16,8 +16,7 @@ defmodule Aoc.Solutions.Year2020.Day04 do
     |> String.split("\n\n", trim: true)
     |> Enum.map(&parse_passport/1)
     |> Enum.filter(&has_all_keys/1)
-    |> Enum.filter(&all_keys_valid/1)
-    |> Enum.count()
+    |> Enum.count(&all_keys_valid/1)
   end
 
   @spec parse_passport(String.t()) :: map
@@ -37,7 +36,8 @@ defmodule Aoc.Solutions.Year2020.Day04 do
   end
 
   defp all_keys_valid(passport) do
-    validate_keys(passport)
+    passport
+    |> validate_keys()
     |> Enum.all?(&elem(&1, 1))
   end
 

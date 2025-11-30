@@ -1,5 +1,7 @@
 defmodule AocWeb.SolutionLive do
+  @moduledoc false
   use AocWeb, :live_view
+
   alias Aoc.Solver
 
   def mount(%{"year" => year, "day" => day}, _session, socket) do

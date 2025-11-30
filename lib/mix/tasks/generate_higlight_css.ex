@@ -1,11 +1,10 @@
 defmodule Mix.Tasks.GenerateHighlightCss do
+  @shortdoc "Generates CSS for syntax highlighting"
+  @moduledoc false
   use Mix.Task
 
-  @shortdoc "Generates CSS for syntax highlighting"
   def run(_) do
-    css =
-      Makeup.Styles.HTML.StyleMap.vim_style()
-      |> Makeup.stylesheet()
+    css = Makeup.stylesheet(Makeup.Styles.HTML.StyleMap.vim_style())
 
     output_path = Path.join(["assets", "css", "highlight.css"])
     File.write!(output_path, css)

@@ -1,8 +1,8 @@
-defmodule Aoc.Solutions.Year2024.Day14 do
-  @tags [:grid, :wrap, :broot]
+tags = [:grid, :wrap, :broot]
 
+defmodule Aoc.Solutions.Year2024.Day14 do
   @moduledoc """
-  Tags: #{inspect(@tags)}
+  Tags: #{inspect(tags)}
 
   Fun day, for sliver just wrap the movement around the grid using rem()
   and for gold, check if roborts are in uniq positions, if so print and pray - my input had many such cases
@@ -12,6 +12,8 @@ defmodule Aoc.Solutions.Year2024.Day14 do
   @behaviour Aoc.Solution
 
   alias Aoc.Solutions.Grid
+
+  @tags tags
 
   @width 101
   @height 103
@@ -27,9 +29,7 @@ defmodule Aoc.Solutions.Year2024.Day14 do
 
     seconds = 101
 
-    coords =
-      robots
-      |> Enum.map(&move_robot_times(grid, &1, seconds))
+    coords = Enum.map(robots, &move_robot_times(grid, &1, seconds))
 
     1..4
     |> Enum.map(&quadrant_count(coords, {@width, @height}, &1))
@@ -54,8 +54,7 @@ defmodule Aoc.Solutions.Year2024.Day14 do
     mid_x = div(width, 2)
     mid_y = div(height, 2)
 
-    coords
-    |> Enum.count(fn {x, y} ->
+    Enum.count(coords, fn {x, y} ->
       case quadrant do
         1 -> x < mid_x and y < mid_y
         2 -> x > mid_x and y < mid_y
@@ -68,13 +67,11 @@ defmodule Aoc.Solutions.Year2024.Day14 do
   def find_christmas_tree(grid, robots, max_seconds) do
     min_seconds = 5000
 
-    1..max_seconds
-    |> Enum.reduce_while(robots, fn seconds, current_robots ->
+    Enum.reduce_while(1..max_seconds, robots, fn seconds, current_robots ->
       next_robots = move_robots(grid, current_robots)
 
       robot_coords =
-        next_robots
-        |> Enum.map(fn [x, y, _, _] -> {x, y} end)
+        Enum.map(next_robots, fn [x, y, _, _] -> {x, y} end)
 
       count_uniq_positions =
         robot_coords
@@ -106,17 +103,18 @@ defmodule Aoc.Solutions.Year2024.Day14 do
   def move_robot_times(grid, robot, times) do
     [x, y, dx, dy] = robot
 
-    Grid.move_wrap_times(grid, {x, y}, {dx, dy}, times)
+    grid
+    |> Grid.move_wrap_times({x, y}, {dx, dy}, times)
     |> List.last()
   end
 
   def parse_robot(line) do
-    line
-    |> all_nums()
+    all_nums(line)
   end
 
   def all_nums(input) do
-    Regex.scan(~r/-?\d*\.?\d+/, input)
+    ~r/-?\d*\.?\d+/
+    |> Regex.scan(input)
     |> List.flatten()
     |> Enum.map(&String.to_integer/1)
   end

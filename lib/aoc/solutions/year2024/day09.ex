@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2024.Day09 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   # attempts
@@ -21,7 +22,7 @@ defmodule Aoc.Solutions.Year2024.Day09 do
       |> String.graphemes()
       |> Enum.with_index()
       |> Enum.flat_map(fn {digit, index} ->
-        value = if rem(index, 2) == 0, do: div(index, 2), else: nil
+        value = if rem(index, 2) == 0, do: div(index, 2)
         List.duplicate(value, String.to_integer(digit))
       end)
 
@@ -40,8 +41,7 @@ defmodule Aoc.Solutions.Year2024.Day09 do
     size = :array.size(initial_array)
     processed_array = process_array(initial_array, 0, size - 1)
 
-    0..(size - 1)
-    |> Enum.reduce(0, fn index, acc ->
+    Enum.reduce(0..(size - 1), 0, fn index, acc ->
       case :array.get(index, processed_array) do
         nil -> acc
         value -> acc + value * index
@@ -75,7 +75,7 @@ defmodule Aoc.Solutions.Year2024.Day09 do
     |> String.graphemes()
     |> Enum.with_index()
     |> Enum.flat_map(fn {digit, index} ->
-      value = if rem(index, 2) == 0, do: div(index, 2), else: nil
+      value = if rem(index, 2) == 0, do: div(index, 2)
       List.duplicate(value, String.to_integer(digit))
     end)
   end
@@ -102,9 +102,7 @@ defmodule Aoc.Solutions.Year2024.Day09 do
   end
 
   def disk_representation(blocks) do
-    blocks
-    |> Enum.map(&to_disk_line/1)
-    |> Enum.join("")
+    Enum.map_join(blocks, "", &to_disk_line/1)
   end
 
   def checksum(str) do
@@ -123,7 +121,8 @@ defmodule Aoc.Solutions.Year2024.Day09 do
     chars = String.to_charlist(str)
     size = length(chars)
 
-    Enum.with_index(chars)
+    chars
+    |> Enum.with_index()
     |> Enum.each(fn {char, idx} ->
       :ets.insert(table, {idx, char})
     end)
@@ -168,7 +167,8 @@ defmodule Aoc.Solutions.Year2024.Day09 do
   end
 
   defp find_last_nonzero(table, start) do
-    Stream.iterate(start, &(&1 - 1))
+    start
+    |> Stream.iterate(&(&1 - 1))
     |> Stream.take_while(&(&1 >= 0))
     |> Enum.find(nil, fn idx ->
       [{_, char}] = :ets.lookup(table, idx)

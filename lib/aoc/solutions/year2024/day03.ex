@@ -1,4 +1,5 @@
 defmodule Aoc.Solutions.Year2024.Day03 do
+  @moduledoc false
   @behaviour Aoc.Solution
 
   @patterns %{
