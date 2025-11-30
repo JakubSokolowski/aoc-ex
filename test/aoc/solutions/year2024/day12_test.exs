@@ -3,8 +3,6 @@ defmodule Aoc.Solutions.Year2024.Day12Test do
 
   import Elixir.Aoc.Solutions.Year2024.Day12
 
-  alias Aoc.Solutions.Grid
-
   @day 12
   @year 2024
   @test_input """
@@ -23,14 +21,6 @@ defmodule Aoc.Solutions.Year2024.Day12Test do
   @xoxo_input """
   OOOOO
   OXOXO
-  OOOOO
-  OXOXO
-  OOOOO
-  """
-
-  @fat_input """
-  OOOOO
-  OOOOO
   OOOOO
   OXOXO
   OOOOO

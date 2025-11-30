@@ -3,8 +3,6 @@ defmodule Aoc.Solutions.Year2024.Day14Test do
 
   import Elixir.Aoc.Solutions.Year2024.Day14
 
-  alias Aoc.Solutions.Grid
-
   @day 14
   @year 2024
 

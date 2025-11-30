@@ -11,6 +11,8 @@ defmodule Aoc.Solutions.Year2024.Day10 do
 
   alias Aoc.Solutions.Grid
 
+  require Logger
+
   @impl true
   def silver(input) do
     grid = Grid.parse(input)
@@ -70,7 +72,7 @@ defmodule Aoc.Solutions.Year2024.Day10 do
   def print_paths(grid, all_paths) do
     Enum.each(all_paths, fn path ->
       Grid.print_only_coords(grid, path)
-      IO.puts("\n")
+      Logger.debug("")
     end)
   end
 

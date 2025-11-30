@@ -1,5 +1,7 @@
 defmodule Aoc.Solutions.Grid do
   @moduledoc false
+  require Logger
+
   defstruct [
     :values,
     :width,
@@ -105,7 +107,7 @@ defmodule Aoc.Solutions.Grid do
     |> :array.to_list()
     |> Enum.chunk_every(grid.width, grid.width, :discard)
     |> Enum.map(&Enum.join(&1, ""))
-    |> Enum.each(&IO.puts/1)
+    |> Enum.each(&Logger.debug/1)
   end
 
   def to_string(grid) do
@@ -189,7 +191,7 @@ defmodule Aoc.Solutions.Grid do
         end
       end)
     end)
-    |> Enum.each(&IO.puts/1)
+    |> Enum.each(&Logger.debug/1)
   end
 
   def find_coords(grid, char) do
