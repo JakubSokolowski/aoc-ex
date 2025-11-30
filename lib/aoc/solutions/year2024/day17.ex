@@ -83,10 +83,10 @@ defmodule Aoc.Solutions.Year2024.Day17 do
 
     case opcode do
       0 -> {div_a(registers, operand), next_pointer, output}
-      1 -> {{a, b ^^^ operand, c}, next_pointer, output}
+      1 -> {{a, bxor(b, operand), c}, next_pointer, output}
       2 -> {{a, combo(registers, operand) |> rem(8), c}, next_pointer, output}
       3 -> if(a == 0, do: {registers, next_pointer, output}, else: {registers, operand, output})
-      4 -> {{a, b ^^^ c, c}, next_pointer, output}
+      4 -> {{a, bxor(b, c), c}, next_pointer, output}
       5 -> {registers, next_pointer, output ++ [combo(registers, operand) |> rem(8)]}
       6 -> {{a, div_value(a, operand, registers), c}, next_pointer, output}
       7 -> {{a, b, div_value(a, operand, registers)}, next_pointer, output}
