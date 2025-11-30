@@ -16,8 +16,6 @@ defmodule Aoc.Solutions.Year2024.Day15 do
 
   alias Aoc.Solutions.Grid
 
-  @tags tags
-
   @impl true
   def silver(input), do: solve_puzzle(input, &move_robot/3, "O")
 

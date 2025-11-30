@@ -10,8 +10,6 @@ defmodule Aoc.Solutions.Year2024.Day11 do
 
   @behaviour Aoc.Solution
 
-  @tags tags
-
   @impl true
   def silver(input) do
     input

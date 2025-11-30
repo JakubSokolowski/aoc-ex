@@ -13,8 +13,6 @@ defmodule Aoc.Solutions.Year2024.Day14 do
 
   alias Aoc.Solutions.Grid
 
-  @tags tags
-
   @width 101
   @height 103
 
