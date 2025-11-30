@@ -107,7 +107,7 @@ defmodule Aoc.Solutions.Year2024.Day18 do
       else
         neighbors =
           for {dx, dy} <- @dirs,
-              next = {pos_x, pos_y} = {elem(pos, 0) + dx, elem(pos, 1) + dy},
+              next = {elem(pos, 0) + dx, elem(pos, 1) + dy},
               Grid.in_bounds?(map, next),
               Grid.element_at(map, next) != "#" do
             {next, {dx, dy}}
@@ -119,7 +119,7 @@ defmodule Aoc.Solutions.Year2024.Day18 do
     end
   end
 
-  defp process(neighbors, pos, dir, cost, q, costs) do
+  defp process(neighbors, _pos, _dir, cost, q, costs) do
     Enum.reduce(neighbors, {q, costs}, fn {next, new_dir}, {q, costs} ->
       new_cost = cost + 1
       state = {next, new_dir}

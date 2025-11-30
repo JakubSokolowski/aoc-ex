@@ -46,7 +46,7 @@ defmodule Aoc.Solutions.Year2024.Day16 do
 
     case find_paths(map, start, target) do
       :no_path -> "No path found"
-      {cost, _, tiles} -> Enum.count(tiles)
+      {_cost, _, tiles} -> Enum.count(tiles)
     end
   end
 
@@ -85,7 +85,7 @@ defmodule Aoc.Solutions.Year2024.Day16 do
     else
       neighbors =
         for {dx, dy} <- @dirs,
-            next = {pos_x, pos_y} = {elem(pos, 0) + dx, elem(pos, 1) + dy},
+            next = {elem(pos, 0) + dx, elem(pos, 1) + dy},
             Grid.in_bounds?(map, next),
             Grid.element_at(map, next) != "#",
             next not in path do
@@ -97,7 +97,7 @@ defmodule Aoc.Solutions.Year2024.Day16 do
     end
   end
 
-  defp process(neighbors, pos, dir, cost, path, q, costs, paths) do
+  defp process(neighbors, _pos, dir, cost, path, q, costs, paths) do
     Enum.reduce(neighbors, {q, costs, paths}, fn {next, new_dir}, {q, costs, paths} ->
       new_cost = cost + 1 + if(new_dir == dir, do: 0, else: 1000)
       state = {next, new_dir}
