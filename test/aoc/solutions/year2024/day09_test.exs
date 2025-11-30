@@ -9,7 +9,6 @@ defmodule Aoc.Solutions.Year2024.Day09Test do
   @test_min_input "12345"
   @test_edge_case "000000000000000000111"
 
-  @tag :skip
   describe "silver/1" do
     test "should solve silver for test min input" do
       input = @test_min_input
@@ -44,7 +43,6 @@ defmodule Aoc.Solutions.Year2024.Day09Test do
     end
   end
 
-  @tag :skip
   describe "gold/1" do
     test "should solve gold for test input" do
       input = @test_input

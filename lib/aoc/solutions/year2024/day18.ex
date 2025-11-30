@@ -5,6 +5,8 @@ defmodule Aoc.Solutions.Year2024.Day18 do
   alias Aoc.Solutions.Grid
   alias Aoc.Solutions.Parser
 
+  require Logger
+
   @dirs [{0, 1}, {1, 0}, {0, -1}, {-1, 0}]
   # Number of points to check per process
   @chunk_size 100
@@ -59,7 +61,7 @@ defmodule Aoc.Solutions.Year2024.Day18 do
   def find_blocking_point_in_range(coords, range) do
     Enum.find_value(range, fn n ->
       {x, y} = point = Enum.at(coords, n - 1)
-      IO.puts("Process #{inspect(self())} checking point {#{x}, #{y}} #{n}")
+      Logger.debug("Process #{inspect(self())} checking point {#{x}, #{y}} #{n}")
 
       coords
       |> Enum.take(n)

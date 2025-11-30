@@ -4,6 +4,8 @@ defmodule Aoc.Solutions.Year2024.Day06 do
 
   alias Aoc.Solutions.Grid
 
+  require Logger
+
   @impl true
   def silver(input) do
     grid = Grid.parse(input)
@@ -118,7 +120,7 @@ defmodule Aoc.Solutions.Year2024.Day06 do
       100 ->
         [{_, processed}] = :ets.lookup(:progress_counter, :processed)
         percentage = Float.round(processed / total * 100, 1)
-        IO.write("\rProcessed #{processed}/#{total} points (#{percentage}%)")
+        Logger.debug("Processed #{processed}/#{total} points (#{percentage}%)")
         report_progress(total)
     end
   end
