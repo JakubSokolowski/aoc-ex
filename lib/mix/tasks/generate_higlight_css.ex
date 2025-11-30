@@ -3,8 +3,10 @@ defmodule Mix.Tasks.GenerateHighlightCss do
   @moduledoc false
   use Mix.Task
 
+  alias Makeup.Styles.HTML.StyleMap
+
   def run(_) do
-    css = Makeup.stylesheet(Makeup.Styles.HTML.StyleMap.vim_style())
+    css = Makeup.stylesheet(StyleMap.vim_style())
 
     output_path = Path.join(["assets", "css", "highlight.css"])
     File.write!(output_path, css)

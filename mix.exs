@@ -70,6 +70,7 @@ defmodule Aoc.MixProject do
     [
       start: ["phx.server"],
       setup: ["deps.get", "assets.setup", "assets.build"],
+      precommit: ["format --check-formatted", "compile --warnings-as-errors", "credo --strict"],
       test: ["test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind aoc", "esbuild aoc"],
