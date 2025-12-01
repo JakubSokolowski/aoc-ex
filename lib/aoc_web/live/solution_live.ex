@@ -171,7 +171,7 @@ defmodule AocWeb.SolutionLive do
             <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-cyber-secondary animate-pulse">
             </div>
 
-            <.form :let={f} for={%{}} as={:solution} phx-submit="solve" class="space-y-6 mt-4">
+            <.form :let={_f} for={%{}} as={:solution} phx-submit="solve" class="space-y-6 mt-4">
               <div class="space-y-2">
                 <label class="text-xs text-cyber-secondary uppercase tracking-widest">
                   Target_Part
